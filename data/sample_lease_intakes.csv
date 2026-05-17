@@ -1,0 +1,5 @@
+lease_id,site_name,region,monthly_rent_usd,rent_issue,repair_obligation_clear,insurance_proof,access_constraints,documentation_complete,missing_fields
+LSE-101,Riverpoint HQ,West,85000,No,Yes,Yes,No,Yes,None
+LSE-102,Metro Storage,Midwest,14000,Yes,No,No,Yes,No,Landlord contact;Maintenance addendum
+LSE-103,Hillview Branch,South,23000,No,Yes,No,No,No,Insurance certificate
+LSE-104,Lakeside Lab,Northeast,39000,Yes,No,Yes,Yes,No,Access schedule;Repair rider
