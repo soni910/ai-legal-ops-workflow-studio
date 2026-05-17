@@ -1,0 +1,31 @@
+thresholds:
+  review: 25
+  escalate: 50
+  reject: 75
+
+contract:
+  unlimited_indemnity: 20
+  uncapped_liability: 20
+  auto_renewal: 8
+  long_termination_notice: 8
+  non_standard_governing_law: 7
+  data_processing_exposure: 10
+  assignment_flexible: 6
+  extended_payment_terms: 6
+
+vendor:
+  sensitive_data_access: 15
+  high_contract_value: 12
+  high_criticality: 12
+  soc2_gap: 15
+  high_privacy_exposure: 12
+  high_dependency: 12
+  missing_docs_penalty: 10
+
+lease:
+  rent_issue: 12
+  unclear_repair_obligation: 12
+  insurance_missing: 12
+  access_constraints: 8
+  documentation_gap: 10
+  missing_fields_penalty: 8
