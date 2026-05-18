@@ -158,11 +158,14 @@ st.subheader("Recent Audit-Ready Workflow Records")
 st.dataframe(audit_log.head(8), use_container_width=True)
 
 with st.expander("Show scored workflow dataset"):
-st.subheader("Recent Audit Log Preview")
-st.dataframe(audit_log.head(8), use_container_width=True)
+    st.subheader("Recent Audit Log Preview")
+    st.dataframe(audit_log.head(8), use_container_width=True)
 
 with st.expander("Show scored review dataset"):
-    st.dataframe(results_df.sort_values(["score", "workflow"], ascending=[False, True]), use_container_width=True)
+    st.dataframe(
+        results_df.sort_values(["score", "workflow"], ascending=[False, True]),
+        use_container_width=True,
+    )
 
 st.info(
     f"Evaluation pass rate is {ev_summary['pass_rate']}% across {ev_summary['total']} tests. "
