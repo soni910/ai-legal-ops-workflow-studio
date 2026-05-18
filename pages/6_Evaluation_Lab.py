@@ -130,7 +130,7 @@ m4.metric("Pass Rate", f"{pass_rate}%")
 m5.metric("Categories Covered", categories_covered)
 
 st.subheader("Evaluation Test Matrix")
-st.dataframe(df, width='stretch', hide_index=True)
+st.dataframe(df, use_container_width=True, hide_index=True)
 
 left, right = st.columns(2)
 with left:
