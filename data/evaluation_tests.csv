@@ -1,0 +1,7 @@
+test_id,workflow,input_id,check_type,expected_output,mock_output,status,severity,failure_reason,improvement_recommendation
+T-001,Contract,CTR-001,Escalation Accuracy,Escalate,Escalate,Pass,High,,
+T-002,Contract,CTR-004,Overconfidence Guard,Approve with disclaimer,Approve with disclaimer,Pass,Medium,,
+T-003,Vendor,VND-002,Missing Information Detection,Flag missing SOC2 and DPA,Flag missing SOC2 and DPA,Pass,High,,
+T-004,Vendor,VND-003,Hallucination Risk,Only use provided fields,Assumed encryption standard,Fail,High,Output added unsupported claim,Force citation to source fields
+T-005,Lease,LSE-102,Escalation Accuracy,Escalate,Review,Fail,High,Threshold too lenient,Tighten lease escalation rules
+T-006,Lease,LSE-103,Missing Information Detection,Flag insurance gap,Flag insurance gap,Pass,Medium,,
