@@ -21,6 +21,7 @@ with st.expander("Methodology and Boundaries"):
 
 st.info(
     "Start with the Executive Dashboard, then review Contract, Vendor, and Lease modules, followed by Governance, Evaluation, and Audit evidence."
+    "Navigation: use the left sidebar to access workflow modules, governance controls, evaluation lab, and audit records."
 )
 
 st.caption(

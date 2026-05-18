@@ -174,6 +174,10 @@ Designed and built a Streamlit-based AI Legal & Operations Workflow Studio that 
 
 ## Suggested Interview Explanation
 I built this project to demonstrate production-minded AI implementation judgment, not just UI development. I translated legal and operational risk requirements into deterministic workflows with governance gates, escalation logic, evaluation checks, and traceable audit records, then defined a realistic path to a controlled live-LLM pilot and full production workflow system.
+Designed and built a Streamlit-based AI Legal & Operations Workflow Studio demonstrating structured intake, rule-based risk scoring, human-review controls, evaluation testing, and audit-ready workflow records across contract, vendor, and lease workflows.
+
+## Suggested Interview Explanation
+I built this project to show production-minded AI implementation judgment, not just UI development. I translated legal and operational risk requirements into deterministic workflows with governance gates, escalation logic, evaluation checks, and traceable audit records, then defined a realistic path to a controlled live-LLM pilot and full production workflow system.
 
 ---
 

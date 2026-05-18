@@ -8,6 +8,10 @@ st.caption("Governance blueprint for a simulated AI workflow prototype. Educatio
 
 st.warning(
     "This page provides an educational mapping of governance concepts for portfolio review. "
+st.caption("Educational governance blueprint for a simulated AI workflow prototype. Not legal advice.")
+
+st.warning(
+    "This page presents an educational/prototype mapping of governance concepts. "
     "It does not claim formal compliance with NIST AI RMF, ISO/IEC 42001, SOC 2, or legal/regulatory requirements."
 )
 
@@ -43,7 +47,7 @@ workflow_df = pd.DataFrame(
     ],
     columns=["Stage", "Owner", "Expected Evidence"],
 )
-st.dataframe(workflow_df, width='stretch')
+st.dataframe(workflow_df, use_container_width=True)
 
 st.subheader("4) Prompt Library and Versioning")
 st.markdown(
@@ -92,7 +96,7 @@ rmf_df = pd.DataFrame(
     ],
     columns=["Function", "Prototype Implementation Pattern"],
 )
-st.dataframe(rmf_df, width='stretch')
+st.dataframe(rmf_df, use_container_width=True)
 
 st.subheader("8) ISO/IEC 42001-inspired Management-System Controls (Educational)")
 iso_controls = [
@@ -119,9 +123,10 @@ owasp_df = pd.DataFrame(
     ],
     columns=["Risk Category", "Prototype Control Pattern"],
 )
-st.dataframe(owasp_df, width='stretch')
+st.dataframe(owasp_df, use_container_width=True)
 
 st.info(
     "Prototype note: this governance page demonstrates control-design thinking and implementation judgment, "
+    "Prototype note: this governance page is intentionally educational and demonstrates control-design thinking, "
     "not a formal certification or compliance attestation."
 )
