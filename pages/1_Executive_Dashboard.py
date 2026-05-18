@@ -110,6 +110,7 @@ st.session_state.executive_dashboard_metrics = metrics
 # -----------------------------
 st.markdown(
     """
+This dashboard illustrates how legal and operations leaders can monitor AI-assisted workflows with clear operating signals:
 This dashboard simulates how legal and operations leaders can monitor AI-assisted workflows at a portfolio level:
 - triage throughput,
 - risk concentration,
@@ -153,6 +154,10 @@ with right:
 # -----------------------------
 # Operational details
 # -----------------------------
+st.subheader("Recent Audit-Ready Workflow Records")
+st.dataframe(audit_log.head(8), use_container_width=True)
+
+with st.expander("Show scored workflow dataset"):
 st.subheader("Recent Audit Log Preview")
 st.dataframe(audit_log.head(8), use_container_width=True)
 
@@ -161,5 +166,6 @@ with st.expander("Show scored review dataset"):
 
 st.info(
     f"Evaluation pass rate is {ev_summary['pass_rate']}% across {ev_summary['total']} tests. "
+    "This is a simulated governance signal intended for portfolio review and control-design discussion, not legal or compliance advice."
     "This is a simulated control signal for governance tracking, not legal or compliance advice."
 )

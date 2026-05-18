@@ -20,6 +20,7 @@ with st.form("contract_triage_form"):
         contract_id = st.text_input("Contract ID", value="CTR-DEMO-001")
         counterparty = st.text_input("Counterparty", value="Fictional Vendor LLC")
         contract_type = st.selectbox("Contract Type", options=contract_types)
+        governing_law = st.selectbox("Governing Law", options=["British Columbia", "Ontario", "Quebec", "Alberta", "Other"])
         governing_law = st.selectbox("Governing Law", options=["Delaware", "New York", "California", "Texas", "Other"])
 
     with col2:

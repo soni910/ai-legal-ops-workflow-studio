@@ -1,7 +1,7 @@
 # AI Legal & Operations Workflow Studio
 
 ## Overview
-AI Legal & Operations Workflow Studio is an employer-facing Streamlit portfolio project that simulates how an organization could design, govern, and evaluate AI-assisted workflows across legal and operations functions.
+AI Legal & Operations Workflow Studio is an employer-facing Streamlit portfolio project that demonstrates how an organization could design, govern, and evaluate AI-assisted workflows across legal and operations functions.
 
 The project emphasizes implementation judgment: structured intake, rule-based risk scoring, human-review controls, audit-ready workflow records, and a clear production upgrade path.
 
@@ -170,6 +170,10 @@ Exports are available in CSV and JSON for reviewer-friendly traceability.
 ---
 
 ## Suggested Resume Bullet
+Designed and built a Streamlit-based AI Legal & Operations Workflow Studio that demonstrates structured intake, rule-based risk scoring, human-review controls, evaluation testing, and audit-ready workflow records across contract, vendor, and lease workflows.
+
+## Suggested Interview Explanation
+I built this project to demonstrate production-minded AI implementation judgment, not just UI development. I translated legal and operational risk requirements into deterministic workflows with governance gates, escalation logic, evaluation checks, and traceable audit records, then defined a realistic path to a controlled live-LLM pilot and full production workflow system.
 Designed and built a Streamlit-based AI Legal & Operations Workflow Studio demonstrating structured intake, rule-based risk scoring, human-review controls, evaluation testing, and audit-ready workflow records across contract, vendor, and lease workflows.
 
 ## Suggested Interview Explanation

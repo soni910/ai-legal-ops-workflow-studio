@@ -4,6 +4,10 @@ import pandas as pd
 st.title("Governance Controls")
 st.markdown("### AI Governance Design and Control Mapping")
 st.divider()
+st.caption("Governance blueprint for a simulated AI workflow prototype. Educational mapping only; not legal advice.")
+
+st.warning(
+    "This page provides an educational mapping of governance concepts for portfolio review. "
 st.caption("Educational governance blueprint for a simulated AI workflow prototype. Not legal advice.")
 
 st.warning(
@@ -122,6 +126,7 @@ owasp_df = pd.DataFrame(
 st.dataframe(owasp_df, use_container_width=True)
 
 st.info(
+    "Prototype note: this governance page demonstrates control-design thinking and implementation judgment, "
     "Prototype note: this governance page is intentionally educational and demonstrates control-design thinking, "
     "not a formal certification or compliance attestation."
 )
