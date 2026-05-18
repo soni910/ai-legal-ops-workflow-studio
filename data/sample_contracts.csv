@@ -1,0 +1,5 @@
+contract_id,counterparty,contract_type,value_usd,term_months,auto_renewal,termination_days,governing_law,indemnity_scope,liability_cap,data_processing,assignment_restricted,payment_terms_days
+CTR-001,Northstar Analytics,MSA,180000,24,Yes,120,British Columbia,Unlimited,None,Yes,No,60
+CTR-002,Blue Harbor Media,SaaS,45000,12,No,30,Ontario,Mutual,12 months fees,Yes,Yes,30
+CTR-003,Pinecrest Logistics,Services,320000,36,Yes,90,Quebec,One-way,Uncapped,No,Yes,45
+CTR-004,Aurora Office Supply,Procurement,12000,6,No,15,Alberta,Mutual,Contract value,No,Yes,30
