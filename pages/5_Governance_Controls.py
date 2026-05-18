@@ -8,6 +8,7 @@ st.caption("Governance blueprint for a simulated AI workflow prototype. Educatio
 
 st.warning(
     "This page provides an educational mapping of governance concepts for portfolio review. "
+)
 st.caption("Educational governance blueprint for a simulated AI workflow prototype. Not legal advice.")
 
 st.warning(
