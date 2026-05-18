@@ -6,7 +6,7 @@ st.title("AI Legal & Operations Workflow Studio")
 st.markdown("### AI Operations Portfolio: Legal, Vendor Risk, Lease, Governance, and Controls")
 st.markdown(
     "This application presents a **simulated AI workflow prototype** focused on operational credibility: "
-    "structured intake, rule-based risk scoring, human-review controls, evaluation discipline, and audit-ready records."
+    "structured intake, rule-based risk scoring, human-review controls, evaluation discipline, and audit-ready records.")
 st.markdown("### Enterprise Workflow Simulation for Legal, Operations, and AI Governance")
 st.markdown(
     "This portfolio application demonstrates **structured AI workflow design** across contract triage, "
