@@ -1,0 +1,36 @@
+name: Pre-deployment checks
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  syntax-and-deploy-readiness:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install lightweight dependencies
+        run: python -m pip install -r requirements.txt
+
+      - name: Run repository pre-deployment checks
+        run: python scripts/predeploy_check.py
+
+      - name: Compile Streamlit app files
+        run: python -m compileall app.py pages utils
+
+      - name: Check for unresolved Git conflict markers
+        run: |
+          if grep -R -n -E '^(<<<<<<<|=======|>>>>>>>)' app.py pages utils README.md; then
+            echo "Unresolved Git conflict markers found. Resolve them before merging."
+            exit 1
+          fi
