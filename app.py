@@ -7,6 +7,10 @@ st.markdown("### AI Operations Portfolio: Legal, Vendor Risk, Lease, Governance,
 st.markdown(
     "This application presents a **simulated AI workflow prototype** focused on operational credibility: "
     "structured intake, rule-based risk scoring, human-review controls, evaluation discipline, and audit-ready records."
+st.markdown("### Enterprise Workflow Simulation for Legal, Operations, and AI Governance")
+st.markdown(
+    "This portfolio application demonstrates **structured AI workflow design** across contract triage, "
+    "vendor risk, lease operations, governance controls, evaluation, and auditability."
 )
 
 st.divider()
@@ -21,6 +25,7 @@ with st.expander("Methodology and Boundaries"):
 
 st.info(
     "Start with the Executive Dashboard, then review Contract, Vendor, and Lease modules, followed by Governance, Evaluation, and Audit evidence."
+    "Navigation: use the left sidebar to access workflow modules, governance controls, evaluation lab, and audit records."
 )
 
 st.caption(

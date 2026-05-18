@@ -9,6 +9,7 @@ st.caption("Employer-facing portfolio case study. Simulated AI workflow prototyp
 st.subheader("1) Project Overview")
 st.write(
     "AI Legal & Operations Workflow Studio is a deterministic Streamlit portfolio project that showcases "
+    "AI Legal & Operations Workflow Studio is a deterministic Streamlit portfolio project that demonstrates "
     "how AI-assisted legal and operations workflows can be structured with governance controls, risk triage, "
     "evaluation checks, and auditable decision logging."
 )
@@ -22,6 +23,7 @@ st.write(
 st.subheader("3) Solution")
 st.write(
     "This project presents an enterprise-style workflow approach: structured intake, rule-based risk scoring, "
+    "This project simulates an enterprise workflow approach: structured intake, rule-based risk scoring, "
     "human-review gates, governance mappings, evaluation test cases, and exportable audit records."
 )
 
@@ -119,6 +121,7 @@ st.markdown(
 st.subheader("10) Suggested Resume Bullet")
 st.code(
     "Designed and built a Streamlit-based AI Legal & Operations Workflow Studio demonstrating deterministic "
+    "Built and deployed a Streamlit-based AI Legal & Operations Workflow Studio demonstrating deterministic "
     "risk triage, governance controls, evaluation testing, and structured audit logging across contract, vendor, and lease workflows.",
     language="text",
 )
@@ -126,6 +129,7 @@ st.code(
 st.subheader("11) Suggested Interview Explanation")
 st.write(
     "I designed this as a production-minded simulation to demonstrate implementation judgment beyond UI development. "
+    "I designed this as a production-minded simulation to show judgment, not just coding. "
     "I translated legal/ops risk concepts into deterministic workflows with review gates, evaluation controls, "
     "and auditability. Then I defined a realistic roadmap from prototype to controlled pilot to production "
     "system with LLM integration, RBAC, persistent logs, and automated evaluation."
