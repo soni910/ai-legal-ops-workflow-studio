@@ -173,4 +173,3 @@ Operational Issues:
 
 st.caption("Disclaimer: Simulated AI workflow prototype; not legal advice.")
 
-st.caption("Disclaimer: Simulated AI workflow prototype; not legal advice.")
