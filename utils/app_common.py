@@ -284,6 +284,53 @@ def apply_global_style() -> None:
             margin-bottom: 0.8rem;
         }
 
+
+        .studio-intake-hero {
+            background:
+                radial-gradient(circle at 88% 10%, rgba(255,255,255,0.22), transparent 22%),
+                linear-gradient(135deg, #13233a 0%, #1f4e79 58%, #35617e 100%);
+            color: #ffffff;
+            border-radius: 22px;
+            padding: 1.45rem 1.65rem;
+            box-shadow: 0 16px 40px rgba(19, 35, 58, 0.18);
+            margin-bottom: 1rem;
+        }
+
+        .studio-intake-hero p, .studio-intake-hero h3, .studio-intake-hero div {
+            color: #ffffff !important;
+        }
+
+        .studio-intake-title {
+            font-size: 1.45rem;
+            font-weight: 780;
+            letter-spacing: -0.03em;
+            margin-bottom: 0.35rem;
+        }
+
+        .studio-intake-copy {
+            font-size: 0.95rem;
+            color: #e3edf8 !important;
+            line-height: 1.5;
+            margin-bottom: 0;
+        }
+
+        .studio-pill-row-dark {
+            display: flex;
+            gap: 0.45rem;
+            flex-wrap: wrap;
+            margin-top: 0.9rem;
+        }
+
+        .studio-pill-dark {
+            border: 1px solid rgba(255,255,255,0.30);
+            background: rgba(255,255,255,0.11);
+            color: #ffffff;
+            border-radius: 999px;
+            padding: 0.24rem 0.68rem;
+            font-size: 0.76rem;
+            font-weight: 670;
+        }
+
         </style>
         """,
         unsafe_allow_html=True,
@@ -349,6 +396,21 @@ def feature_card(title: str, body: str) -> None:
         <div class="studio-card">
             <h3>{title}</h3>
             <p>{body}</p>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
+def intake_hero(title: str, body: str, pills: Iterable[str]) -> None:
+    pill_html = "".join(f"<span class='studio-pill-dark'>{escape(str(pill))}</span>" for pill in pills)
+    st.markdown(
+        f"""
+        <div class="studio-intake-hero">
+            <div class="studio-eyebrow">Structured intake workflow</div>
+            <div class="studio-intake-title">{escape(title)}</div>
+            <p class="studio-intake-copy">{escape(body)}</p>
+            <div class="studio-pill-row-dark">{pill_html}</div>
         </div>
         """,
         unsafe_allow_html=True,
