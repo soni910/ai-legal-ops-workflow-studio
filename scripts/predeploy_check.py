@@ -29,6 +29,8 @@ REQUIRED_FILES = [
     "data/risk_rules.yaml",
 ]
 
+CONFLICT_MARKERS = ("<" * 7, "=" * 7, ">" * 7)
+
 
 def fail(message: str) -> None:
     print(f"FAIL: {message}")
@@ -42,15 +44,13 @@ def check_required_files() -> None:
 
 
 def check_conflict_markers() -> None:
-    """Fail only on real Git conflict marker lines, not explanatory docs."""
     search_roots = [Path("app.py"), Path("pages"), Path("utils"), Path("README.md")]
-    marker_prefixes = ("<" * 7, "=" * 7, ">" * 7)
     for root in search_roots:
         paths = [root] if root.is_file() else root.rglob("*.py")
         for path in paths:
-            for line_number, line in enumerate(path.read_text(encoding="utf-8").splitlines(), start=1):
-                if line.startswith(marker_prefixes):
-                    fail(f"Merge conflict marker found in {path}:{line_number}")
+            text = path.read_text(encoding="utf-8")
+            if any(marker in text for marker in CONFLICT_MARKERS):
+                fail(f"Merge conflict marker found in {path}")
 
 
 def check_python_compiles() -> None:

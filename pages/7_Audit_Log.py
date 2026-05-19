@@ -27,7 +27,7 @@ m3.metric("High-Risk Records", int((log_df["risk_level"] == "High").sum()) if le
 m4.metric("Unique Modules", int(log_df["module"].nunique()) if len(log_df) else 0)
 
 st.subheader("Audit Log Records")
-st.dataframe(log_df, width='stretch', hide_index=True)
+st.dataframe(log_df, use_container_width=True, hide_index=True)
 
 csv_data = log_df.to_csv(index=False).encode("utf-8")
 json_data = log_df.to_json(orient="records", indent=2).encode("utf-8")
