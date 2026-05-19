@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-from utils.app_common import page_header, safe_read_csv, risk_badge
+from utils.app_common import intake_hero, kpi_card, page_header, safe_read_csv, risk_badge
 from utils.risk_engine import score_contract_dict
 from utils.audit import init_session_audit_log, create_audit_record, append_audit_record
 
@@ -9,11 +9,23 @@ page_header("Contract Triage", "Structured Contract Risk Intake and Escalation",
 # Session-state audit log bucket for cross-page workflow tracking
 init_session_audit_log(st.session_state)
 
+intake_hero(
+    "Contract risk triage command center",
+    "Capture structured contract facts, evaluate deterministic risk controls, and route reviewer-ready outcomes with audit-ready rationale.",
+    [
+        "Rule-based scoring",
+        "Human review controls",
+        "Escalation routing",
+        "Audit-ready record",
+    ],
+)
+
 sample_contracts = safe_read_csv("data/sample_contracts.csv", ["contract_id","contract_type"])
 contract_types = sorted(sample_contracts["contract_type"].dropna().unique().tolist())
 
 with st.form("contract_triage_form"):
-    st.subheader("Structured Intake")
+    st.subheader("Structured Intake Profile")
+    st.caption("Use this intake to generate a deterministic simulated risk decision and reviewer-ready recommendation package.")
 
     col1, col2 = st.columns(2)
     with col1:
@@ -81,12 +93,17 @@ if submitted:
     result = score_contract_dict(contract_payload)
 
     st.subheader("Risk Decision")
-    k1, k2, k3 = st.columns(3)
-    k1.metric("Risk Score", result["risk_score"])
-    k2.metric("Risk Level", risk_badge(result["risk_level"]))
-    k3.metric("Human Review Required", "Yes" if result["human_review_required"] else "No")
+    decision_cols = st.columns(4)
+    with decision_cols[0]:
+        kpi_card("Risk score", result["risk_score"], "Deterministic rule-engine score across legal and operational factors.", "blue")
+    with decision_cols[1]:
+        kpi_card("Risk level", risk_badge(result["risk_level"]), "Normalized risk band used for routing and review controls.", "medium" if result["risk_level"] == "Medium" else "high" if result["risk_level"] == "High" else "low")
+    with decision_cols[2]:
+        kpi_card("Human review", "Required" if result["human_review_required"] else "Not required", "Escalation controls enforce reviewer checkpoints when thresholds are met.", "blue")
+    with decision_cols[3]:
+        kpi_card("Escalation route", "Configured", "Route is defined below for legal/ops reviewer ownership and accountability.", "slate")
 
-    st.write("**Escalation Route:**", result["escalation_route"])
+    st.markdown(f"**Escalation Route:** {result['escalation_route']}")
 
     tabs = st.tabs([
         "Triggered Rules",
@@ -94,6 +111,8 @@ if submitted:
         "Recommended Next Steps",
         "Simulated AI Output",
     ])
+
+    st.caption("Decision package: rules, missing facts, action plan, and simulated reviewer narrative.")
 
     with tabs[0]:
         if result["triggered_rules"]:
@@ -148,7 +167,7 @@ if submitted:
     )
     append_audit_record(st.session_state, audit_event)
 
-    st.success("Workflow event added to session-state audit log.")
+    st.success("Contract triage event added to session-state audit log.")
 
     report_text = f"""AI Legal & Operations Workflow Studio - Simulated Contract Triage Report
 Disclaimer: Simulation only. Not legal advice.
@@ -175,10 +194,12 @@ Recommended Next Steps:
 """
 
     st.download_button(
-        "Download Text Report",
+        "Download Contract Triage Report",
         data=report_text.encode("utf-8"),
         file_name=f"contract_triage_{contract_id}.txt",
         mime="text/plain",
     )
+
+st.caption("Disclaimer: Simulated AI workflow prototype; not legal advice.")
 
 st.caption("Disclaimer: Simulated AI workflow prototype; not legal advice.")
