@@ -1,15 +1,12 @@
 import streamlit as st
 import pandas as pd
+from utils.app_common import page_header
 
-st.title("Case Study and Roadmap")
-st.markdown("### Employer-Facing Project Narrative and Production Path")
-st.divider()
-st.caption("Employer-facing portfolio case study. Simulated AI workflow prototype; not legal advice.")
+page_header("Case Study and Roadmap", "Employer-Facing Project Narrative and Production Path", "Employer-facing portfolio case study. Simulated AI workflow prototype; not legal advice.")
 
 st.subheader("1) Project Overview")
 st.write(
     "AI Legal & Operations Workflow Studio is a deterministic Streamlit portfolio project that showcases "
-    "AI Legal & Operations Workflow Studio is a deterministic Streamlit portfolio project that demonstrates "
     "how AI-assisted legal and operations workflows can be structured with governance controls, risk triage, "
     "evaluation checks, and auditable decision logging."
 )
@@ -23,7 +20,6 @@ st.write(
 st.subheader("3) Solution")
 st.write(
     "This project presents an enterprise-style workflow approach: structured intake, rule-based risk scoring, "
-    "This project simulates an enterprise workflow approach: structured intake, rule-based risk scoring, "
     "human-review gates, governance mappings, evaluation test cases, and exportable audit records."
 )
 
@@ -41,7 +37,7 @@ modules_df = pd.DataFrame(
     ],
     columns=["Module", "Purpose"],
 )
-st.dataframe(modules_df, use_container_width=True, hide_index=True)
+st.dataframe(modules_df, width='stretch', hide_index=True)
 
 st.subheader("5) Skills Demonstrated")
 st.markdown(
@@ -70,7 +66,7 @@ roadmap_df = pd.DataFrame(
     ],
     columns=["Stage", "Status", "Capabilities"],
 )
-st.dataframe(roadmap_df, use_container_width=True, hide_index=True)
+st.dataframe(roadmap_df, width='stretch', hide_index=True)
 
 st.subheader("8) Architecture Diagram (Conceptual)")
 st.markdown(
@@ -105,7 +101,7 @@ comparison_df = pd.DataFrame(
     ],
     columns=["Dimension", "Current Prototype", "Production Target"],
 )
-st.dataframe(comparison_df, use_container_width=True, hide_index=True)
+st.dataframe(comparison_df, width='stretch', hide_index=True)
 
 st.subheader("9) Limitations")
 st.markdown(
@@ -121,7 +117,6 @@ st.markdown(
 st.subheader("10) Suggested Resume Bullet")
 st.code(
     "Designed and built a Streamlit-based AI Legal & Operations Workflow Studio demonstrating deterministic "
-    "Built and deployed a Streamlit-based AI Legal & Operations Workflow Studio demonstrating deterministic "
     "risk triage, governance controls, evaluation testing, and structured audit logging across contract, vendor, and lease workflows.",
     language="text",
 )
@@ -129,7 +124,6 @@ st.code(
 st.subheader("11) Suggested Interview Explanation")
 st.write(
     "I designed this as a production-minded simulation to demonstrate implementation judgment beyond UI development. "
-    "I designed this as a production-minded simulation to show judgment, not just coding. "
     "I translated legal/ops risk concepts into deterministic workflows with review gates, evaluation controls, "
     "and auditability. Then I defined a realistic roadmap from prototype to controlled pilot to production "
     "system with LLM integration, RBAC, persistent logs, and automated evaluation."
