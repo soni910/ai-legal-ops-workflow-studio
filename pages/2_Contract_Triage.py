@@ -21,7 +21,6 @@ with st.form("contract_triage_form"):
         counterparty = st.text_input("Counterparty", value="Fictional Vendor LLC")
         contract_type = st.selectbox("Contract Type", options=contract_types)
         governing_law = st.selectbox("Governing Law", options=["British Columbia", "Ontario", "Quebec", "Alberta", "Other"])
-        governing_law = st.selectbox("Governing Law", options=["Delaware", "New York", "California", "Texas", "Other"])
 
     with col2:
         value_usd = st.number_input("Contract Value (USD)", min_value=0, value=125000, step=5000)
