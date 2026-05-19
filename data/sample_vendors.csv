@@ -1,0 +1,5 @@
+vendor_id,vendor_name,service_type,contract_value_usd,criticality,data_access,soc2_status,privacy_exposure,operational_dependency,missing_docs
+VND-001,SignalGrid,IT Monitoring,95000,Medium,Internal,Current,Medium,Medium,None
+VND-002,HelixPay,Payroll Processing,410000,High,PII,Expired,High,High,SOC2 report;DPA
+VND-003,Vertex Clinical,Benefits Admin,280000,High,PHI,Pending,High,High,Security questionnaire
+VND-004,Sunlane Print,Office Services,18000,Low,None,Current,Low,Low,None
