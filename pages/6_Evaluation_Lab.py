@@ -1,8 +1,14 @@
 import streamlit as st
 import pandas as pd
-from utils.app_common import page_header
+from utils.app_common import chart_panel_header, intake_hero, kpi_card, page_header
 
 page_header("Evaluation Lab", "Quality-Control and Policy Testing Matrix", "Employer-facing simulation of AI workflow quality controls. Not legal advice.")
+
+intake_hero(
+    "Evaluation and assurance command center",
+    "Assess deterministic workflow behavior for escalation accuracy, policy boundaries, security controls, and output completeness.",
+    ["Deterministic test suite", "Policy controls", "Safety checks", "Quality metrics"],
+)
 
 st.markdown(
     "This evaluation view demonstrates how a legal/operations AI workflow can be tested for policy adherence, "
@@ -122,23 +128,29 @@ failed_tests = total_tests - passed_tests
 pass_rate = round((passed_tests / total_tests) * 100, 1) if total_tests else 0.0
 categories_covered = df["control_category"].nunique()
 
-m1, m2, m3, m4, m5 = st.columns(5)
-m1.metric("Total Tests", total_tests)
-m2.metric("Passed Tests", passed_tests)
-m3.metric("Failed Tests", failed_tests)
-m4.metric("Pass Rate", f"{pass_rate}%")
-m5.metric("Categories Covered", categories_covered)
+metric_cols = st.columns(5)
+with metric_cols[0]:
+    kpi_card("Total tests", total_tests, "Deterministic evaluation scenarios in current suite.", "blue")
+with metric_cols[1]:
+    kpi_card("Passed tests", passed_tests, "Scenarios meeting expected policy and quality outcomes.", "low")
+with metric_cols[2]:
+    kpi_card("Failed tests", failed_tests, "Scenarios requiring control, rule, or logic remediation.", "high")
+with metric_cols[3]:
+    kpi_card("Pass rate", f"{pass_rate}%", "Aggregate quality signal for current simulated workflow behavior.", "blue")
+with metric_cols[4]:
+    kpi_card("Categories", categories_covered, "Distinct control categories covered by the test suite.", "slate")
 
 st.subheader("Evaluation Test Matrix")
-st.dataframe(df, use_container_width=True, hide_index=True)
+st.caption("Structured test evidence for employer review across contract, vendor, lease, governance, and cross-module controls.")
+st.dataframe(df, width='stretch', hide_index=True)
 
 left, right = st.columns(2)
 with left:
-    st.subheader("Pass / Fail Distribution")
+    chart_panel_header("Pass / fail distribution", "Quick view of outcome balance across deterministic evaluation scenarios.")
     st.bar_chart(df["pass_fail"].value_counts())
 
 with right:
-    st.subheader("Control Category Coverage")
+    chart_panel_header("Control category coverage", "Breadth of governance, security, and quality controls represented in testing.")
     st.bar_chart(df["control_category"].value_counts())
 
 st.caption("Disclaimer: Educational simulation; not legal advice, certification, or compliance attestation.")
