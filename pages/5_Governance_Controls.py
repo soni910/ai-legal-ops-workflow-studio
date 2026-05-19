@@ -1,8 +1,14 @@
 import streamlit as st
 import pandas as pd
-from utils.app_common import page_header
+from utils.app_common import chart_panel_header, intake_hero, page_header
 
 page_header("Governance Controls", "AI Governance Design and Control Mapping", "Governance blueprint for a simulated AI workflow prototype. Educational mapping only; not legal advice.")
+
+intake_hero(
+    "Governance control architecture overview",
+    "This page maps practical governance controls for AI-assisted legal and operations workflows, including review gates, security controls, and escalation governance.",
+    ["Educational mapping", "No compliance attestation", "Human-in-the-loop", "Auditability"],
+)
 
 st.warning("This page provides an educational mapping of governance concepts for portfolio review. It does not claim formal compliance with NIST AI RMF, ISO/IEC 42001, SOC 2, or legal/regulatory requirements.")
 
@@ -38,7 +44,8 @@ workflow_df = pd.DataFrame(
     ],
     columns=["Stage", "Owner", "Expected Evidence"],
 )
-st.dataframe(workflow_df, width='stretch')
+chart_panel_header("AI-use approval workflow", "Ownership and evidence expectations across approval lifecycle stages.")
+st.dataframe(workflow_df, width="stretch", hide_index=True)
 
 st.subheader("4) Prompt Library and Versioning")
 st.markdown(
@@ -87,7 +94,8 @@ rmf_df = pd.DataFrame(
     ],
     columns=["Function", "Prototype Implementation Pattern"],
 )
-st.dataframe(rmf_df, width='stretch')
+chart_panel_header("NIST AI RMF-style mapping", "Govern, Map, Measure, and Manage functions translated to prototype operations.")
+st.dataframe(rmf_df, width="stretch", hide_index=True)
 
 st.subheader("8) ISO/IEC 42001-inspired Management-System Controls (Educational)")
 iso_controls = [
@@ -114,10 +122,10 @@ owasp_df = pd.DataFrame(
     ],
     columns=["Risk Category", "Prototype Control Pattern"],
 )
-st.dataframe(owasp_df, width='stretch')
+chart_panel_header("OWASP LLM-style security controls", "Illustrative control patterns for common LLM security risk categories.")
+st.dataframe(owasp_df, width="stretch", hide_index=True)
 
 st.info(
     "Prototype note: this governance page demonstrates control-design thinking and implementation judgment, "
     "not a formal certification or compliance attestation."
 )
-
