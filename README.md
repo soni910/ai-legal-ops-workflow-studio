@@ -174,6 +174,10 @@ Designed and built a Streamlit-based AI Legal & Operations Workflow Studio that 
 
 ## Suggested Interview Explanation
 I built this project to demonstrate production-minded AI implementation judgment, not just UI development. I translated legal and operational risk requirements into deterministic workflows with governance gates, escalation logic, evaluation checks, and traceable audit records, then defined a realistic path to a controlled live-LLM pilot and full production workflow system.
+Designed and built a Streamlit-based AI Legal & Operations Workflow Studio demonstrating structured intake, rule-based risk scoring, human-review controls, evaluation testing, and audit-ready workflow records across contract, vendor, and lease workflows.
+
+## Suggested Interview Explanation
+I built this project to show production-minded AI implementation judgment, not just UI development. I translated legal and operational risk requirements into deterministic workflows with governance gates, escalation logic, evaluation checks, and traceable audit records, then defined a realistic path to a controlled live-LLM pilot and full production workflow system.
 
 ---
 
@@ -195,41 +199,3 @@ streamlit run app.py
 3. Select this repository.
 4. Set `app.py` as the entrypoint.
 5. Deploy (no secrets required for this simulated prototype).
-
-### Pre-Deployment Syntax Check
-Before pushing changes or redeploying after a merge conflict, run:
-
-```bash
-python scripts/predeploy_check.py
-```
-
-This verifies required files are present, checks for unresolved Git conflict markers, and compiles `app.py`, `pages/`, and `utils/` so syntax issues are caught before Streamlit Cloud builds the app.
-
-### Avoiding Merge and Deployment Issues
-Use this workflow before merging or redeploying:
-
-1. Keep one active PR branch for the app at a time when possible.
-2. Before resolving conflicts, compare the PR branch against the latest `main` branch.
-3. Remove every Git conflict marker (`<<<<<<<`, `=======`, `>>>>>>>`) before committing.
-4. Run `python scripts/predeploy_check.py` locally before pushing.
-5. Confirm the GitHub Action named **Pre-deployment checks** passes before merging.
-6. In Streamlit Community Cloud, confirm the app is pointed at the branch/commit that passed checks.
-
-This reduces the chance that Streamlit Cloud deploys a branch with unresolved merge markers, incomplete parentheses, indentation errors, or missing project files.
-
-
-### PR Merge-Readiness Check Against `main`
-The predeployment checker now verifies that your current branch contains the latest `origin/main` before merge:
-
-```bash
-python scripts/predeploy_check.py
-```
-
-If it fails with a branch-sync message, run:
-
-```bash
-git fetch origin
-git merge origin/main   # or: git rebase origin/main
-```
-
-Then rerun the predeploy check and push the updated branch before merging the PR.

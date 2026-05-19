@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-from utils.app_common import chart_panel_header, dashboard_hero, insight_card, kpi_card, page_header, safe_read_csv
+from utils.app_common import page_header, safe_read_csv, risk_badge
 
 from utils.audit import build_audit_log
 from utils.risk_engine import load_rules, score_contract, score_vendor, score_lease
@@ -106,121 +106,69 @@ metrics = {
 st.session_state.executive_dashboard_metrics = metrics
 
 # -----------------------------
-# Executive summary and KPI cards
+# Employer-facing overview
 # -----------------------------
-risk_dist = results_df["risk_bucket"].value_counts().reindex(["High", "Medium", "Low"], fill_value=0)
-workflow_dist = results_df["workflow"].value_counts().sort_values(ascending=False)
-priority_review_rate = int(round((metrics["human_review_required"] / metrics["total_reviews"]) * 100, 0)) if metrics["total_reviews"] else 0
-escalation_rate = int(round((metrics["open_escalations"] / metrics["total_reviews"]) * 100, 0)) if metrics["total_reviews"] else 0
-
-dashboard_hero(
-    "Operational command center for governed AI-assisted workflows",
-    "Monitor simulated intake volume, risk concentration, escalation pressure, documentation gaps, and evaluation performance across legal and operations workflows.",
-    [
-        f"{metrics['total_reviews']} simulated reviews",
-        f"{priority_review_rate}% require human review",
-        f"{ev_summary['pass_rate']}% evaluation pass rate",
-        "No paid APIs or live confidential data",
-    ],
+st.markdown(
+    """
+This dashboard illustrates how legal and operations leaders can monitor AI-assisted workflows with clear operating signals:
+This dashboard simulates how legal and operations leaders can monitor AI-assisted workflows at a portfolio level:
+- triage throughput,
+- risk concentration,
+- human-review load,
+- escalation pressure,
+- documentation quality,
+- and governance effectiveness.
+"""
 )
 
-st.markdown("### Executive KPI Snapshot")
-kpi_row_1 = st.columns(4)
-with kpi_row_1[0]:
-    kpi_card("Total reviews", metrics["total_reviews"], "Combined contract, vendor, and lease workflow records.", "blue")
-with kpi_row_1[1]:
-    kpi_card("High risk", metrics["high_risk_reviews"], "Items meeting escalation-level rule thresholds.", "high")
-with kpi_row_1[2]:
-    kpi_card("Medium risk", metrics["medium_risk_reviews"], "Items needing reviewer attention before approval.", "medium")
-with kpi_row_1[3]:
-    kpi_card("Low risk", metrics["low_risk_reviews"], "Items with lower operational or legal-risk signals.", "low")
+# -----------------------------
+# KPI cards
+# -----------------------------
+row1 = st.columns(4)
+row1[0].metric("Total Simulated Reviews", metrics["total_reviews"])
+row1[1].metric("High-Risk Reviews", metrics["high_risk_reviews"])
+row1[2].metric("Medium-Risk Reviews", metrics["medium_risk_reviews"])
+row1[3].metric("Low-Risk Reviews", metrics["low_risk_reviews"])
 
-kpi_row_2 = st.columns(4)
-with kpi_row_2[0]:
-    kpi_card("Human review", metrics["human_review_required"], f"{priority_review_rate}% of simulated records route to review.", "blue")
-with kpi_row_2[1]:
-    kpi_card("Open escalations", metrics["open_escalations"], f"{escalation_rate}% of records require escalation routing.", "high")
-with kpi_row_2[2]:
-    kpi_card("Missing docs", metrics["missing_document_count"], "Incomplete intake facts or documentation gaps detected.", "slate")
-with kpi_row_2[3]:
-    kpi_card("Governance score", f"{metrics['governance_maturity_score']}/100", "Composite of evaluation quality and escalation control signals.", "blue")
-
-st.markdown("### Executive Interpretation")
-insight_cols = st.columns(3)
-with insight_cols[0]:
-    insight_card("Risk concentration", f"{metrics['high_risk_reviews']} high-risk records are visible for escalation review, helping leaders focus scarce reviewer capacity.")
-with insight_cols[1]:
-    insight_card("Review workload", f"{metrics['human_review_required']} records require human review, showing how governed automation still preserves accountable checkpoints.")
-with insight_cols[2]:
-    insight_card("Control signal", f"Evaluation coverage is summarized at {ev_summary['pass_rate']}%, creating a measurable quality-control signal for workflow governance.")
-
-st.markdown("### Leadership Action Queue")
-action_queue = pd.DataFrame(
-    [
-        [
-            "High-risk reviews",
-            metrics["high_risk_reviews"],
-            "Confirm escalation owner and prioritize reviewer capacity for high-risk contract/vendor/lease records.",
-        ],
-        [
-            "Human-review workload",
-            f"{metrics['human_review_required']} records / {priority_review_rate}%",
-            "Track whether reviewer volume is operationally sustainable before expanding workflow scope.",
-        ],
-        [
-            "Missing documentation",
-            metrics["missing_document_count"],
-            "Tighten intake requirements and add follow-up prompts where repeated documentation gaps appear.",
-        ],
-        [
-            "Evaluation coverage",
-            f"{ev_summary['pass_rate']}% pass rate",
-            "Review failed or severe test cases before piloting any live-LLM workflow component.",
-        ],
-    ],
-    columns=["Operating Signal", "Current Snapshot", "Recommended Management Action"],
-)
-st.dataframe(action_queue, width="stretch", hide_index=True)
+row2 = st.columns(4)
+row2[0].metric("Human-Review Required", metrics["human_review_required"])
+row2[1].metric("Open Escalations", metrics["open_escalations"])
+row2[2].metric("Missing-Document Count", metrics["missing_document_count"])
+row2[3].metric("Governance Maturity Score", f"{metrics['governance_maturity_score']}/100")
 
 # -----------------------------
 # Charts
 # -----------------------------
-st.markdown("### Portfolio Distribution")
 left, right = st.columns(2)
 
 with left:
-    chart_panel_header("Risk distribution", "Rule-based risk bands across all simulated workflow records.")
+    st.subheader("Risk Distribution")
+    risk_dist = results_df["risk_bucket"].value_counts().reindex(["High", "Medium", "Low"], fill_value=0)
     st.bar_chart(risk_dist)
 
 with right:
-    chart_panel_header("Workflow volume", "Review distribution across contract, vendor, and lease operations modules.")
+    st.subheader("Workflow Type Volume")
+    workflow_dist = results_df["workflow"].value_counts().sort_values(ascending=False)
     st.bar_chart(workflow_dist)
 
 # -----------------------------
 # Operational details
 # -----------------------------
-st.markdown("### Audit-Ready Operating Evidence")
-st.caption("Recent workflow records show timestamped decisions, routing, scores, and explanation fields for reviewer accountability.")
-audit_preview_columns = [
-    "timestamp",
-    "module",
-    "workflow_id",
-    "risk_score",
-    "risk_level",
-    "human_review_required",
-    "escalation_route",
-    "decision_status",
-]
-st.dataframe(audit_log[audit_preview_columns].head(8), width="stretch", hide_index=True)
+st.subheader("Recent Audit-Ready Workflow Records")
+st.dataframe(audit_log.head(8), use_container_width=True)
 
-dataset_expander = st.expander("Show scored workflow dataset")
-dataset_expander.dataframe(
-    results_df.sort_values(["score", "workflow"], ascending=[False, True]),
-    width="stretch",
-    hide_index=True,
-)
+with st.expander("Show scored workflow dataset"):
+    st.subheader("Recent Audit Log Preview")
+    st.dataframe(audit_log.head(8), use_container_width=True)
+
+with st.expander("Show scored review dataset"):
+    st.dataframe(
+        results_df.sort_values(["score", "workflow"], ascending=[False, True]),
+        use_container_width=True,
+    )
 
 st.info(
     f"Evaluation pass rate is {ev_summary['pass_rate']}% across {ev_summary['total']} tests. "
-    "This dashboard is a simulated governance signal intended for portfolio review and control-design discussion, not legal or compliance advice."
+    "This is a simulated governance signal intended for portfolio review and control-design discussion, not legal or compliance advice."
+    "This is a simulated control signal for governance tracking, not legal or compliance advice."
 )
