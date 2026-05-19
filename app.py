@@ -11,20 +11,35 @@ st.markdown(
 
 st.divider()
 
-with st.expander("Methodology and Boundaries"):
-    st.markdown("""
-- This app uses **deterministic simulated outputs** and **rule-based risk scoring**.
-- It demonstrates workflow design, governance controls, evaluation thinking, and auditability.
-- It does **not** connect to paid APIs, live client systems, or confidential production data.
-- It is intended for portfolio review, not legal advice or compliance attestation.
-""")
+st.markdown("### What to Review First")
+col1, col2, col3 = st.columns(3)
+with col1:
+    feature_card(
+        "Executive Dashboard",
+        "Review portfolio-level throughput, risk distribution, human-review demand, escalation pressure, and governance maturity signals.",
+    )
+with col2:
+    feature_card(
+        "Workflow Modules",
+        "Run structured contract, vendor, and lease intake scenarios with deterministic risk scoring and reviewer-ready next steps.",
+    )
+with col3:
+    feature_card(
+        "Controls Evidence",
+        "Inspect governance mappings, evaluation test coverage, and exportable audit logs that show implementation judgment.",
+    )
+
+st.markdown("### Methodology and Boundaries")
+with st.expander("Read the prototype boundaries", expanded=True):
+    st.markdown(
+        """
+- Uses **deterministic simulated outputs** and **rule-based risk scoring** only.
+- Demonstrates workflow design, governance controls, evaluation thinking, and auditability.
+- Does **not** connect to paid APIs, live client systems, external databases, or confidential production data.
+- Intended for portfolio review and implementation discussion, not legal advice or compliance attestation.
+"""
+    )
 
 st.info(
-    "Start with the Executive Dashboard, then review Contract, Vendor, and Lease modules, followed by Governance, Evaluation, and Audit evidence."
-    "Navigation: use the left sidebar to access workflow modules, governance controls, evaluation lab, and audit records."
-)
-
-st.caption(
-    "Disclaimer: This is a simulated educational prototype for portfolio review. "
-    "It does not provide legal advice or compliance determinations."
+    "Suggested path: Executive Dashboard → Contract Triage → Vendor Risk Intake → Lease Operations → Governance Controls → Evaluation Lab → Audit Log → Case Study & Roadmap."
 )
