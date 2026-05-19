@@ -1,14 +1,21 @@
 import streamlit as st
 from utils.risk_engine import score_vendor_dict
-from utils.app_common import page_header, risk_badge
+from utils.app_common import intake_hero, kpi_card, page_header, risk_badge
 from utils.audit import init_session_audit_log, create_audit_record, append_audit_record
 
 page_header("Vendor Risk Intake", "Third-Party Risk Assessment and Approval Controls", "Simulated vendor risk intake workflow. Simulated AI workflow prototype; not legal advice.")
 
 init_session_audit_log(st.session_state)
 
+intake_hero(
+    "Vendor risk intake command center",
+    "Capture third-party data exposure and control posture, then route a deterministic risk decision with reviewer-ready actions.",
+    ["Third-party governance", "Privacy/security controls", "Escalation routing", "Audit-ready record"],
+)
+
 with st.form("vendor_risk_form"):
-    st.subheader("Vendor Intake Form")
+    st.subheader("Vendor Intake Profile")
+    st.caption("Structured intake fields are used to generate deterministic risk scoring and approval-routing recommendations.")
     c1, c2 = st.columns(2)
 
     with c1:
@@ -66,14 +73,21 @@ if submitted:
     result = score_vendor_dict(payload)
 
     st.subheader("Risk Outcome")
-    m1, m2, m3 = st.columns(3)
-    m1.metric("Risk Score", result["risk_score"])
-    m2.metric("Risk Level", risk_badge(result["risk_level"]))
-    m3.metric("Human Review Required", "Yes" if result["human_review_required"] else "No")
+    decision_cols = st.columns(4)
+    with decision_cols[0]:
+        kpi_card("Risk score", result["risk_score"], "Deterministic score across vendor data, security, and dependency signals.", "blue")
+    with decision_cols[1]:
+        kpi_card("Risk level", risk_badge(result["risk_level"]), "Normalized risk band used for approval and escalation controls.", "medium" if result["risk_level"] == "Medium" else "high" if result["risk_level"] == "High" else "low")
+    with decision_cols[2]:
+        kpi_card("Human review", "Required" if result["human_review_required"] else "Not required", "Reviewer checkpoints are enforced when policy thresholds are met.", "blue")
+    with decision_cols[3]:
+        kpi_card("Escalation route", "Configured", "Route owner is defined below for accountable triage.", "slate")
 
-    st.write("**Escalation Route:**", result["escalation_route"])
+    st.markdown(f"**Escalation Route:** {result['escalation_route']}")
 
     t1, t2, t3, t4 = st.tabs(["Triggered Rules", "Missing Information", "Recommendation", "Approval Checklist"])
+
+    st.caption("Decision package: triggered controls, missing information, action recommendations, and reviewer checklist.")
 
     with t1:
         for rule in result["triggered_rules"] or ["No elevated rules triggered."]:
@@ -167,4 +181,3 @@ Recommended Next Steps:
     )
 
 st.caption("Disclaimer: Simulated AI workflow prototype; not legal advice.")
-
