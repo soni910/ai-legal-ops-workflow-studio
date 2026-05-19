@@ -1,14 +1,21 @@
 import streamlit as st
 from utils.risk_engine import score_lease_readiness_dict
-from utils.app_common import page_header, risk_badge
+from utils.app_common import intake_hero, kpi_card, page_header, risk_badge
 from utils.audit import init_session_audit_log, create_audit_record, append_audit_record
 
 page_header("Lease Operations", "Real Estate Intake Readiness and Operational Triage", "Simulated lease and real-estate operations workflow automation prototype. Not legal advice.")
 
 init_session_audit_log(st.session_state)
 
+intake_hero(
+    "Lease readiness operations center",
+    "Evaluate intake completeness, operational dependencies, and escalation needs before lease execution or move-in milestones.",
+    ["Readiness controls", "Operations follow-up", "Escalation triggers", "Audit-ready record"],
+)
+
 with st.form("lease_ops_form"):
-    st.subheader("Lease Intake & Readiness Form")
+    st.subheader("Lease Intake & Readiness Profile")
+    st.caption("Use structured intake fields to produce deterministic lease-readiness scoring and follow-up actions.")
 
     c1, c2 = st.columns(2)
     with c1:
@@ -56,19 +63,27 @@ if submitted:
     result = score_lease_readiness_dict(payload)
 
     st.subheader("Lease Readiness Outcome")
-    m1, m2, m3 = st.columns(3)
-    m1.metric("Lease-Readiness Score", result["risk_score"])
-    m2.metric("Risk Level", risk_badge(result["risk_level"]))
-    m3.metric("Human Review Required", "Yes" if result["human_review_required"] else "No")
+    decision_cols = st.columns(4)
+    with decision_cols[0]:
+        kpi_card("Readiness score", result["risk_score"], "Deterministic readiness score across legal and operational prerequisites.", "blue")
+    with decision_cols[1]:
+        kpi_card("Risk level", risk_badge(result["risk_level"]), "Risk band used to route review and escalation.", "medium" if result["risk_level"] == "Medium" else "high" if result["risk_level"] == "High" else "low")
+    with decision_cols[2]:
+        kpi_card("Human review", "Required" if result["human_review_required"] else "Not required", "Escalation gates preserve accountable lease-operations review.", "blue")
+    with decision_cols[3]:
+        kpi_card("Escalation route", "Configured", "Ownership path is defined below for action coordination.", "slate")
 
-    st.write("**Escalation Route:**", result["escalation_route"])
+    st.markdown(f"**Escalation Route:** {result['escalation_route']}")
 
     tab1, tab2, tab3, tab4 = st.tabs([
+
         "Missing Fields",
         "Next Steps",
         "Escalation Triggers",
         "Simulated Follow-up Email",
     ])
+
+    st.caption("Decision package: missing fields, next steps, escalation signals, and a simulated coordination email.")
 
     with tab1:
         for missing in result["missing_facts"] or ["No missing fields detected."]:
@@ -155,5 +170,7 @@ Operational Issues:
         file_name=f"lease_ops_{lease_id}.txt",
         mime="text/plain",
     )
+
+st.caption("Disclaimer: Simulated AI workflow prototype; not legal advice.")
 
 st.caption("Disclaimer: Simulated AI workflow prototype; not legal advice.")
