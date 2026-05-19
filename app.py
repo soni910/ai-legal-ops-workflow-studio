@@ -1,12 +1,19 @@
 import streamlit as st
+from utils.app_common import apply_global_style, feature_card, hero_panel, render_sidebar_context
 
 st.set_page_config(page_title="AI Legal & Operations Workflow Studio", page_icon="⚖️", layout="wide")
+apply_global_style()
+render_sidebar_context()
 
-st.title("AI Legal & Operations Workflow Studio")
-st.markdown("### AI Operations Portfolio: Legal, Vendor Risk, Lease, Governance, and Controls")
+hero_panel(
+    "Employer-grade AI operations portfolio",
+    "AI Legal & Operations Workflow Studio",
+    "A simulated enterprise workflow environment for contract triage, vendor risk, lease operations, governance controls, evaluation discipline, and audit-ready decision records.",
+)
+
 st.markdown(
-    "This application presents a **simulated AI workflow prototype** focused on operational credibility: "
-    "structured intake, rule-based risk scoring, human-review controls, evaluation discipline, and audit-ready records."
+    "This application demonstrates how AI-assisted workflows can be designed responsibly before live LLM adoption: "
+    "structured intake, deterministic rule-based scoring, human-review gates, quality checks, and traceable operating evidence."
 )
 
 st.divider()
