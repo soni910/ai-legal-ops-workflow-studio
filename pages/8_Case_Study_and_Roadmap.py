@@ -114,19 +114,4 @@ st.markdown(
 """
 )
 
-st.subheader("10) Suggested Resume Bullet")
-st.code(
-    "Designed and built a Streamlit-based AI Legal & Operations Workflow Studio demonstrating deterministic "
-    "risk triage, governance controls, evaluation testing, and structured audit logging across contract, vendor, and lease workflows.",
-    language="text",
-)
-
-st.subheader("11) Suggested Interview Explanation")
-st.write(
-    "I designed this as a production-minded simulation to demonstrate implementation judgment beyond UI development. "
-    "I translated legal/ops risk concepts into deterministic workflows with review gates, evaluation controls, "
-    "and auditability. Then I defined a realistic roadmap from prototype to controlled pilot to production "
-    "system with LLM integration, RBAC, persistent logs, and automated evaluation."
-)
-
 st.info("This case study is a portfolio prototype for educational demonstration and does not provide legal advice.")
